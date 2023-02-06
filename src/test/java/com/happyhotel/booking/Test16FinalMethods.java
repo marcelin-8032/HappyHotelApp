@@ -1,17 +1,19 @@
 package com.happyhotel.booking;
 
 import com.happyhotel.booking.dao.BookingDAO;
+import com.happyhotel.booking.dao.IBookingDAO;
 import com.happyhotel.booking.model.Room;
-import com.happyhotel.booking.service.BookingService;
-import com.happyhotel.booking.service.PaymentService;
-import com.happyhotel.booking.service.RoomService;
+import com.happyhotel.booking.service.IBookService;
+import com.happyhotel.booking.service.IPaymentService;
+import com.happyhotel.booking.service.IRoomService;
+import com.happyhotel.booking.service.impl.BookingServiceImpl;
+import com.happyhotel.booking.service.impl.PaymentServiceImpl;
+import com.happyhotel.booking.service.impl.RoomServiceImpl;
 import com.happyhotel.booking.tools.MailSender;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.Arrays;
 import java.util.Collections;
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.mock;
@@ -19,22 +21,22 @@ import static org.mockito.Mockito.when;
 
 class Test16FinalMethods {
 
-    private BookingService bookingService;
-    private PaymentService paymentServiceMock;
-    private RoomService roomServiceMock;
-    private BookingDAO bookingDAOMock;
+    private IBookService bookingService;
+    private IPaymentService paymentServiceMock;
+    private IRoomService roomServiceMock;
+    private IBookingDAO bookingDAOMock;
     private MailSender mailSenderMock;
 
 
     @BeforeEach
     void setup() {
-        this.paymentServiceMock = mock(PaymentService.class);
-        this.roomServiceMock = mock(RoomService.class);
+        this.paymentServiceMock = mock(PaymentServiceImpl.class);
+        this.roomServiceMock = mock(RoomServiceImpl.class);
         this.bookingDAOMock = mock(BookingDAO.class);
         this.mailSenderMock = mock(MailSender.class);
 
 
-        this.bookingService = new BookingService(paymentServiceMock,
+        this.bookingService = new BookingServiceImpl(paymentServiceMock,
                 roomServiceMock, bookingDAOMock, mailSenderMock);
     }
 

@@ -1,9 +1,12 @@
 package com.happyhotel.booking;
 
-import com.happyhotel.booking.dao.BookingDAO;
+import com.happyhotel.booking.dao.IBookingDAO;
 import com.happyhotel.booking.model.BookingRequest;
-import com.happyhotel.booking.service.*;
-import com.happyhotel.booking.tools.*;
+import com.happyhotel.booking.service.IPaymentService;
+import com.happyhotel.booking.service.IRoomService;
+import com.happyhotel.booking.service.impl.BookingServiceImpl;
+import com.happyhotel.booking.tools.CurrencyConverter;
+import com.happyhotel.booking.tools.MailSender;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.*;
@@ -19,14 +22,14 @@ import static org.mockito.Mockito.mockStatic;
 class Test15Answers {
 
     @InjectMocks
-    private BookingService bookingService;
+    private BookingServiceImpl bookingService;
     @Mock
-    private PaymentService paymentServiceMock;
+    private IPaymentService paymentServiceMock;
     @Mock
-    private RoomService roomServiceMock;
+    private IRoomService roomServiceMock;
     @Mock
     //@Spy
-    private BookingDAO bookingDAOMock;
+    private IBookingDAO bookingDAOMock;
     @Mock
     private MailSender mailSenderMock;
     @Captor

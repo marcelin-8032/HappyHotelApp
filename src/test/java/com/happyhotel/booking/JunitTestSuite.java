@@ -1,7 +1,7 @@
 package com.happyhotel.booking;
 
 
-import org.junit.platform.suite.api.IncludePackages;
+
 import org.junit.platform.suite.api.SelectPackages;
 import org.junit.platform.suite.api.Suite;
 

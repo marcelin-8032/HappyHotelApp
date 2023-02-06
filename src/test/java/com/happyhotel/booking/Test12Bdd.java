@@ -1,16 +1,18 @@
 package com.happyhotel.booking;
 
-import com.happyhotel.booking.dao.BookingDAO;
+import com.happyhotel.booking.dao.IBookingDAO;
 import com.happyhotel.booking.model.BookingRequest;
 import com.happyhotel.booking.model.Room;
-import com.happyhotel.booking.service.BookingService;
-import com.happyhotel.booking.service.PaymentService;
-import com.happyhotel.booking.service.RoomService;
+import com.happyhotel.booking.service.IPaymentService;
+import com.happyhotel.booking.service.IRoomService;
+import com.happyhotel.booking.service.impl.BookingServiceImpl;
 import com.happyhotel.booking.tools.MailSender;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentCaptor;
-import org.mockito.*;
+import org.mockito.Captor;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.time.LocalDate;
@@ -19,25 +21,25 @@ import java.util.Collections;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.BDDMockito.then;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verifyNoMoreInteractions;
 
 @ExtendWith(MockitoExtension.class)
 class Test12Bdd {
 
     @InjectMocks
-    private BookingService bookingService;
+    private BookingServiceImpl bookingService;
     @Mock
-    private PaymentService paymentServiceMock;
+    private IPaymentService paymentServiceMock;
     @Mock
-    private RoomService roomServiceMock;
+    private IRoomService roomServiceMock;
     @Mock
     //@Spy
-    private BookingDAO bookingDAOMock;
+    private IBookingDAO bookingDAOMock;
     @Mock
     private MailSender mailSenderMock;
     @Captor
     private ArgumentCaptor<Double> doubleCaptor;
-
 
     @Test
     void should_CountAvailablePlaces_When_OneRoomAvailable() {

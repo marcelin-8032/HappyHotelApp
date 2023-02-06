@@ -1,37 +1,36 @@
 package com.happyhotel.booking;
 
-import com.happyhotel.booking.dao.BookingDAO;
+import com.happyhotel.booking.dao.IBookingDAO;
 import com.happyhotel.booking.model.BookingRequest;
-import com.happyhotel.booking.service.BookingService;
-import com.happyhotel.booking.service.PaymentService;
-import com.happyhotel.booking.service.RoomService;
+import com.happyhotel.booking.service.IBookService;
+import com.happyhotel.booking.service.IPaymentService;
+import com.happyhotel.booking.service.IRoomService;
+import com.happyhotel.booking.service.impl.BookingServiceImpl;
 import com.happyhotel.booking.tools.MailSender;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
 class Test07VerifyingBehaviour {
 
-    private BookingService bookingService;
-    private PaymentService paymentServiceMock;
-    private RoomService roomServiceMock;
-    private BookingDAO bookingDAOMock;
+    private IBookService bookingService;
+    private IPaymentService paymentServiceMock;
+    private IRoomService roomServiceMock;
+    private IBookingDAO bookingDAOMock;
     private MailSender mailSenderMock;
 
 
     @BeforeEach
     void setup() {
-        this.paymentServiceMock = mock(PaymentService.class);
-        this.roomServiceMock = mock(RoomService.class);
-        this.bookingDAOMock = mock(BookingDAO.class);
+        this.paymentServiceMock = mock(IPaymentService.class);
+        this.roomServiceMock = mock(IRoomService.class);
+        this.bookingDAOMock = mock(IBookingDAO.class);
         this.mailSenderMock = mock(MailSender.class);
 
-
-        this.bookingService = new BookingService(paymentServiceMock,
+        this.bookingService = new BookingServiceImpl(paymentServiceMock,
                 roomServiceMock, bookingDAOMock, mailSenderMock);
 
     }
